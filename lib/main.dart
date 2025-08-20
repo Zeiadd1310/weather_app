@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_app/pages/splash_page.dart';
 import 'package:weather_app/providers/weather_provider.dart';
-import 'pages/home_page.dart';
 
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create: (context) {
-        return WeatherProvider();
-      },
-      child: WeatherApp(),
+      create: (context) => WeatherProvider(),
+      child: const WeatherApp(),
     ),
   );
 }
@@ -19,16 +17,16 @@ class WeatherApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final weatherProvider = Provider.of<WeatherProvider>(context);
     return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Provider.of<WeatherProvider>(context).weatherData == null
-            ? Colors.grey
-            : Provider.of<WeatherProvider>(
-                context,
-              ).weatherData!.getThemeColor(),
-      ),
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      title: 'Weather App',
+      theme: ThemeData(
+        primarySwatch: weatherProvider.weatherData == null
+            ? Colors.grey
+            : weatherProvider.weatherData!.getThemeColor(),
+      ),
+      home: const SplashPage(),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/models/weather_model.dart';
+import 'package:weather_app/pages/about_page.dart';
 import 'package:weather_app/pages/search_page.dart';
 import 'package:weather_app/providers/weather_provider.dart';
 
@@ -41,6 +42,15 @@ class _HomePageState extends State<HomePage> {
                 MaterialPageRoute(
                   builder: (context) => SearchPage(updateUi: updateUi),
                 ),
+              );
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AboutPage()),
               );
             },
           ),
